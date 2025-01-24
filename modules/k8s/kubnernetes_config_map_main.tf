@@ -3,10 +3,7 @@ module "aws_auth_configmap" {
   version = "~> 20.0"
 
   depends_on = [
-    aws_eks_cluster.main,
-    aws_eks_node_group.main,
-    aws_iam_role.eks_cluster,
-    aws_iam_role.eks_node,
+    module.eks
   ]
 
   manage_aws_auth_configmap = true
