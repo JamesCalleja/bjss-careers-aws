@@ -1,4 +1,7 @@
-resource "kubernetes_config_map_v1_data" "main" {
+module "aws_auth_configmap" {
+  source  = "terraform-aws-modules/eks/aws//modules/aws-auth"
+  version = "~> 20.0"
+
   depends_on = [
     aws_eks_cluster.main,
     aws_eks_node_group.main,
@@ -6,30 +9,33 @@ resource "kubernetes_config_map_v1_data" "main" {
     aws_iam_role.eks_node,
   ]
 
-  metadata {
-    name      = "aws-auth"
-    namespace = "kube-system"
-  }
+  manage_aws_auth_configmap = true
 
-  force = true
-
-  data = {
-    mapRoles = <<YAML
-- rolearn: ${aws_iam_role.eks_node.arn}
-  username: system:node:{{EC2PrivateDNSName}}
-  groups:
-    - system:bootstrappers
-    - system:nodes
-- rolearn: ${var.identifiers.account_admin_role_simple_arn}
-  username: kubectl-access-user
-  groups:
-    - system:masters
-- rolearn: ${var.identifiers.app_deployer_role_arn}
-  username: kubectl-access-deploy
-  groups:
-    - system:masters
-- rolearn: ${var.identifiers.candidates_role_arn}
-  username: kubectl-access-candidate
-YAML
-  }
+  aws_auth_roles = [
+    {
+      rolearn  = "${aws_iam_role.eks_node.arn}"
+      username = "{{EC2PrivateDNSName}}"
+      groups   = ["system:node", "system:bootstrappers"]
+    },
+    {
+      rolearn  = "${var.identifiers.account_admin_role_simple_arn}"
+      username = "kubectl-access-user"
+      groups   = ["system:masters"]
+    },
+    {
+      rolearn  = "${var.identifiers.app_deployer_role_arn}"
+      username = "kubectl-access-deploy"
+      groups   = ["system:masters"]
+    },
+    {
+      rolearn  = "${var.identifiers.candidates_role_arn}"
+      username = "adminaccess"
+      groups   = ["system:masters"]
+    },
+    {
+      rolearn  = "${data.terraform_remote_state.source_state.outputs.terraform_runner_role_arn}"
+      username = "kubectl-access-candidate"
+      groups   = ["system:masters"]
+    }
+  ]
 }
