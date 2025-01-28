@@ -53,3 +53,19 @@ output "private_hosted_zone_id" {
 output "nat_gateway_public_ips" {
   value = module.vpc.nat_public_ips
 }
+
+output "oidc_provider_arn" {
+  value = module.eks.oidc_provider_arn
+}
+
+output "cluster_endpoint" {
+  value = module.eks.cluster_endpoint
+}
+
+output "cluster_version" {
+  value = module.eks.cluster_version
+}
+
+output "cluster_name" {
+  value = module.eks.cluster_name
+}

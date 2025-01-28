@@ -6,7 +6,7 @@ module "eks" {
   cluster_version                          = "1.31"
   cluster_endpoint_public_access           = true
   cluster_enabled_log_types                = ["api", "audit", "authenticator", "controllerManager", "scheduler"]
-  subnet_ids                               = var.subnet_ids
+  subnet_ids                               = module.vpc.private_subnets
   enable_cluster_creator_admin_permissions = true
   cloudwatch_log_group_retention_in_days   = 7
 
@@ -17,7 +17,7 @@ module "eks" {
       from_port   = 1
       to_port     = 65535
       type        = "ingress"
-      cidr_blocks = [var.cidr]
+      cidr_blocks = [module.vpc.vpc_cidr_block]
     }
   }
 
