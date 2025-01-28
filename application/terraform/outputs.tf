@@ -21,3 +21,4 @@ output "environment" {
 output "private_hosted_zone_id" {
   value = data.terraform_remote_state.account.outputs.private_hosted_zone_id
 }
+
