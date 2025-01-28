@@ -12,19 +12,19 @@ module "eks_blueprints_addons" {
       most_recent = false
     }
     coredns = {
-      most_recent = false
+      most_recent = true
     }
     vpc-cni = {
-      most_recent = false
+      most_recent = true
     }
     kube-proxy = {
-      most_recent = false
+      most_recent = true
     }
   }
 
   # K8s Add-ons
   enable_aws_for_fluentbit            = false
-  enable_aws_cloudwatch_metrics       = false
+  enable_aws_cloudwatch_metrics       = true
   enable_cert_manager                 = false
   enable_external_secrets             = false
   enable_aws_load_balancer_controller = false
