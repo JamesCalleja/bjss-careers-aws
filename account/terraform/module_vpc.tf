@@ -4,7 +4,7 @@ module "vpc" {
 
   name = local.prefix
   cidr = "10.222.0.0/16"
-  azs  = data.aws_availability_zones.available.names
+  azs  = data.aws_availability_zones.available.names  #TODO: this may cause a race condition
 
   private_subnets = [
     "10.222.0.0/24",

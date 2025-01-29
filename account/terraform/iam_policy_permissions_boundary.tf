@@ -133,7 +133,7 @@ data "aws_iam_policy_document" "permissions_boundary" {
       test     = "ArnLike"
       variable = "iam:PolicyARN"
       values = [
-        "arn:aws:iam::${var.aws_account_id}:policy/${local.uppercase_project}*",
+        "arn:aws:iam::${locals.aws_account_id}:policy/${local.uppercase_project}*",
       ]
     }
   }

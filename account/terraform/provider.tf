@@ -7,7 +7,7 @@ provider "aws" {
   ]
 
   assume_role {
-    role_arn     = "arn:aws:iam::322411843910:role/TECHTESTAccountDeployRole"
+    role_arn     = "arn:aws:iam::$ACCOUNT_NUMBER:role/TECHTESTAccountDeployRole"
     session_name = "${var.project}-${local.environment}-${var.component}"
   }
 

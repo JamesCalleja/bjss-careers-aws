@@ -1,7 +1,6 @@
 variable "aws_account_id" {
   type        = string
   description = "The AWS Account ID into which we are deploying"
-  default     = "322411843910"
 }
 
 variable "component" {

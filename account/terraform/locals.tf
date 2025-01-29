@@ -12,7 +12,7 @@ locals {
     environment               = local.environment
     aws_account_id            = var.aws_account_id
     app_prefix                = "${var.project}-${local.environment}-${var.component}"
-    account_deployer_role_arn = "arn:aws:iam::322411843910:role/TECHTESTAccountDeployRole"
+    account_deployer_role_arn = "arn:aws:iam::${var.aws_account_id}:role/TECHTESTAccountDeployRole"
     account_admin_role_arn    = "arn:aws:iam::${var.aws_account_id}:role/${local.account_admin_role_name}"
     any_user_in_this_account  = "arn:aws:iam::${var.aws_account_id}:root"
     permissions_boundary_arn  = aws_iam_policy.permissions_boundary.arn

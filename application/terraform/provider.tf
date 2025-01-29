@@ -3,7 +3,7 @@ provider "aws" {
   region = var.region
 
   allowed_account_ids = [
-    var.aws_account_id,
+    "$ACCOUNT_NUMBER"
   ]
 
   assume_role {
@@ -21,7 +21,7 @@ provider "aws" {
   region = "us-east-1"
 
   allowed_account_ids = [
-    var.aws_account_id,
+    "$ACCOUNT_NUMBER"
   ]
 
   assume_role {
