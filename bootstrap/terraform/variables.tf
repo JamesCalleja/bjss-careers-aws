@@ -1,7 +1,7 @@
 variable "aws_account_id" {
   type        = string
   description = "The AWS Account ID into which we are bootstrapping the project"
-  default     = "322411843910" #TODO: data "aws_caller_identity" "current" {}
+  default     = "$ENV"
 }
 
 variable "component" {
